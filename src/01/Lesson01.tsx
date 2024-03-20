@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ResponseInterface, run } from "../00/Config";
-import { TASK_NAME_01 } from "../00/Config.constants";
+import { ResponseInterface, run } from "../Utils/utils";
+import { TASK_NAME_01 } from "../Utils/utils.constants";
 
 const HelloApiComponent = () => {
   const [response, setResponse] = useState<ResponseInterface>({

@@ -1,4 +1,4 @@
-import { ANSWER_URL, POST_URL, TASK_URL } from "./Config.constants";
+import { ANSWER_URL, POST_URL, TASK_URL } from "./utils.constants";
 
 export interface ResponseInterface {
   result: {
