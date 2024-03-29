@@ -133,7 +133,10 @@ const handleTaskResponse = async (
   return "";
 };
 
-const submitAnswer = async (token: string, answer: string | string[]) => {
+export const submitAnswer = async (
+  token: string,
+  answer: string | string[] | boolean
+) => {
   const response = await fetch(`${ANSWER_URL}/${token}`, {
     method: "POST",
     headers: {

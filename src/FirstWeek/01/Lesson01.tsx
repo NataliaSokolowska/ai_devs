@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { TASK_NAME_01 } from "../Utils/utils.constants";
-import useTaskStore from "../Utils/useTaskStore";
+import { TASK_NAME_01 } from "../../Utils/utils.constants";
+import useTaskStore from "../../Utils/useTaskStore";
 const HelloApiComponent = () => {
   const { response, isLoading } = useTaskStore((state) => ({
     response: state.responses[TASK_NAME_01],

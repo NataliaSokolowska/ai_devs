@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { TASK_NAME_04_MODERATION } from "../Utils/utils.constants";
-import useTaskStore from "../Utils/useTaskStore";
+import { TASK_NAME_04_MODERATION } from "../../Utils/utils.constants";
+import useTaskStore from "../../Utils/useTaskStore";
 
 const ModerationComponent = () => {
   const { response, isLoading } = useTaskStore((state) => ({

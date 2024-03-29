@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import useTaskStore from "../Utils/useTaskStore";
-import { TASK_NAME_04_BLOGGER } from "../Utils/utils.constants";
+import useTaskStore from "../../Utils/useTaskStore";
+import { TASK_NAME_04_BLOGGER } from "../../Utils/utils.constants";
 
 const Blogger = () => {
   const { response, isLoading } = useTaskStore((state) => ({
