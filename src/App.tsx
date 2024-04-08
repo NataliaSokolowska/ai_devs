@@ -4,6 +4,8 @@ import ModerationComponent from "./FirstWeek/04/Moderation";
 import Liar from "./FirstWeek/05/Liar";
 import "./App.css";
 import ConnectioctionWithApi from "./ConnectioctionWithApi";
+import Inprompt from "./SecondWeek/02/Inprompt";
+import Embedding from "./SecondWeek/03/Embedding";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <ModerationComponent />
       <Blogger /> */}
       {/* <Liar /> */}
+      {/* <Inprompt /> */}
+      <Embedding />
     </>
   );
 }

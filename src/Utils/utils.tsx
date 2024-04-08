@@ -4,6 +4,7 @@ import {
   LANGUAGE_PL,
   OPEAN_API_CHAT_URL,
   OPEAN_API_MODERATION_URL,
+  OPEN_API_EMBEDING_ADA_002_URL,
   OPEN_API_KEY,
   POST_URL,
   TASK_URL,
@@ -237,6 +238,29 @@ export const connectWithOpenApiWithFilteredInformation = async (
 
   const data = await response.json();
   const answer = data.choices[0].message.content;
+
+  return answer;
+};
+
+export const connectWithAda002 = async (inputData: string) => {
+  const response = await fetch(`${OPEN_API_EMBEDING_ADA_002_URL}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${OPEN_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "text-embedding-ada-002",
+      input: inputData,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error ${response.status}`);
+  }
+
+  const data = await response.json();
+  const answer = data.data[0].embedding;
 
   return answer;
 };
