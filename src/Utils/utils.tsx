@@ -205,3 +205,38 @@ export const connectWithOpenAi = async () => {
 
   return data;
 };
+
+export const connectWithOpenApiWithFilteredInformation = async (
+  doc: string,
+  question: string
+) => {
+  const response = await fetch(`${OPEAN_API_CHAT_URL}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${OPEN_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content: doc,
+        },
+        {
+          role: "user",
+          content: question,
+        },
+      ],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error ${response.status}`);
+  }
+
+  const data = await response.json();
+  const answer = data.choices[0].message.content;
+
+  return answer;
+};

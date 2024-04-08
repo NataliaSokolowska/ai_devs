@@ -7,6 +7,8 @@ export const TASK_NAME_04_MODERATION = "moderation";
 export const TASK_NAME_04_BLOGGER = "blogger";
 export const TASK_NAME_05_LIAR = "liar";
 
+export const TASK_NAME_02_02_INPROMPT = "inprompt";
+
 export const OPEAN_API_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 export const OPEAN_API_MODERATION_URL = "https://api.openai.com/v1/moderations";
 
