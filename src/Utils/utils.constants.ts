@@ -11,6 +11,7 @@ export const TASK_NAME_02_02_INPROMPT = "inprompt";
 export const TASK_NAME_02_03_EMBEDDING = "embedding";
 export const TASK_MESSAGE_02_03_EMBEDDING = "Hawaiian pizza";
 export const TASK_NAME_02_04_WHISPER = "whisper";
+export const TASK_NAME_02_05_FUNCTIONS = "functions";
 
 export const OPEAN_API_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 export const OPEAN_API_MODERATION_URL = "https://api.openai.com/v1/moderations";

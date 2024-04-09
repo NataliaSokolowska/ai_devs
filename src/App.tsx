@@ -7,6 +7,7 @@ import ConnectioctionWithApi from "./ConnectioctionWithApi";
 import Inprompt from "./SecondWeek/02/Inprompt";
 import Embedding from "./SecondWeek/03/Embedding";
 import Whisper from "./SecondWeek/04/Whisper";
+import Functions from "./SecondWeek/05/Functions";
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       {/* <Liar /> */}
       {/* <Inprompt /> */}
       {/* <Embedding /> */}
-      <Whisper />
+      {/* <Whisper /> */}
+      {/* <Functions /> */}
     </>
   );
 }

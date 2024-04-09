@@ -137,7 +137,7 @@ const handleTaskResponse = async (
 
 export const submitAnswer = async (
   token: string,
-  answer: string | string[] | boolean
+  answer: string | string[] | boolean | Record<string, unknown>
 ) => {
   const response = await fetch(`${ANSWER_URL}/${token}`, {
     method: "POST",
