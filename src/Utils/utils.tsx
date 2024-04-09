@@ -4,6 +4,7 @@ import {
   LANGUAGE_PL,
   OPEAN_API_CHAT_URL,
   OPEAN_API_MODERATION_URL,
+  OPEN_API_AUDIO_TO_TEXT_WHISPER,
   OPEN_API_EMBEDING_ADA_002_URL,
   OPEN_API_KEY,
   POST_URL,
@@ -263,4 +264,26 @@ export const connectWithAda002 = async (inputData: string) => {
   const answer = data.data[0].embedding;
 
   return answer;
+};
+
+export const connectWithWhisper = async (audioFile: File) => {
+  const formData = new FormData();
+  formData.append("file", audioFile);
+  formData.append("model", "whisper-1");
+
+  const response = await fetch(`${OPEN_API_AUDIO_TO_TEXT_WHISPER}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${OPEN_API_KEY}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log(data);
+  return data;
 };
