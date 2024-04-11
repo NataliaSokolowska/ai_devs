@@ -8,6 +8,8 @@ import Inprompt from "./SecondWeek/02/Inprompt";
 import Embedding from "./SecondWeek/03/Embedding";
 import Whisper from "./SecondWeek/04/Whisper";
 import Functions from "./SecondWeek/05/Functions";
+import Rodo from "./ThirdWeek/01/Rodo";
+import Scraper from "./ThirdWeek/02/Scraper";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
       {/* <Embedding /> */}
       {/* <Whisper /> */}
       {/* <Functions /> */}
+      {/* <Rodo /> */}
+      {/* <Scraper /> */}
     </>
   );
 }

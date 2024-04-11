@@ -11,7 +11,10 @@ import {
   TASK_URL,
 } from "./utils.constants";
 import {
+  AppError,
   BlogPostOutline,
+  ErrorType,
+  GetTaskResponse,
   ModerationResult,
   ResponseInterface,
   TaskResponse,
@@ -34,10 +37,55 @@ const getToken = async (taskName: string) => {
   return data.token;
 };
 
-const getTask = async (token: string) => {
-  const response = await fetch(`${TASK_URL}/${token}`);
-  const task = await response.json();
-  return task;
+const createError = (
+  message: string,
+  type: ErrorType,
+  statusCode?: number
+): AppError => {
+  return { type, message, statusCode: statusCode || null };
+};
+
+const getTask = async (
+  token: string,
+  attempt = 1
+): Promise<GetTaskResponse> => {
+  try {
+    const response = await fetch(`${TASK_URL}/${token}`, {
+      method: "GET",
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+      },
+    });
+    const task = await response.json();
+
+    if (!response.ok) {
+      throw createError(
+        `HTTP error! status: ${response.status}`,
+        "HttpError",
+        response.status
+      );
+    }
+    return task;
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === "AbortError") {
+        throw createError(
+          "Przekroczono czas oczekiwania na odpowiedź",
+          "TimeoutError"
+        );
+      } else if (attempt <= 3) {
+        console.log("Ponawianie próby...");
+        return getTask(token, attempt + 1);
+      } else {
+        throw createError(
+          "Nie udało się pobrać zadania po 3 próbach",
+          "NetworkError"
+        );
+      }
+    } else {
+      throw error;
+    }
+  }
 };
 
 const moderationResponse = async (taskResponses: string[]) => {
@@ -210,7 +258,8 @@ export const connectWithOpenAi = async () => {
 
 export const connectWithOpenApiWithFilteredInformation = async (
   doc: string,
-  question: string
+  question: string,
+  modelName: string
 ) => {
   const response = await fetch(`${OPEAN_API_CHAT_URL}`, {
     method: "POST",
@@ -219,7 +268,7 @@ export const connectWithOpenApiWithFilteredInformation = async (
       Authorization: `Bearer ${OPEN_API_KEY}`,
     },
     body: JSON.stringify({
-      model: "gpt-4",
+      model: modelName,
       messages: [
         {
           role: "system",

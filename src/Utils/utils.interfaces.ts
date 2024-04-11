@@ -40,3 +40,18 @@ export type BlogPostOutline = {
   msg: string;
   blog: string[];
 };
+
+export type GetTaskResponse = {
+  code: number;
+  input: string;
+  msg: string;
+  question: string;
+};
+
+export type ErrorType = "HttpError" | "TimeoutError" | "NetworkError";
+
+export interface AppError {
+  message: string;
+  type: ErrorType;
+  statusCode?: number | null;
+}
