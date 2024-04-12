@@ -13,8 +13,6 @@ const Search = () => {
   const { collections, fetchCollections, searchInQdrant, updateCollection } =
     useQdrant(vectors);
 
-  console.log(vectors.length);
-
   useEffect(() => {
     if (vectors.length === 0) {
       fetchVectors();

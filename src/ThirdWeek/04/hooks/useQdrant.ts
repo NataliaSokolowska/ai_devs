@@ -18,10 +18,7 @@ const useQdrant = (vectors: VectorData[]) => {
       }),
     })
       .then((response) => response.json())
-      .then((data: QdrantResponse<Collection>) => {
-        console.log("Collection created successfully", data);
-        setCollections([data.result]);
-      })
+      .then((data: QdrantResponse<Collection>) => setCollections([data.result]))
       .catch((error) => console.error("Failed to create collection:", error));
 
     return response;
