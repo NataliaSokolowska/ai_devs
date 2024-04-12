@@ -164,18 +164,18 @@ const createBlogPost = async (blogOutline: BlogPostOutline) => {
 };
 
 const handleTaskResponse = async (
-  taskResponse: TaskResponse
+  taskResponse: TaskResponse | GetTaskResponse
 ): Promise<string | string[]> => {
-  if (taskResponse.cookie) {
+  if ("cookie" in taskResponse && taskResponse.cookie) {
     return taskResponse.cookie;
   }
 
-  if (taskResponse.input) {
+  if ("input" in taskResponse && taskResponse.input) {
     const result = await moderationResponse(taskResponse.input);
     return result;
   }
 
-  if (taskResponse.blog) {
+  if ("blog" in taskResponse && taskResponse.blog) {
     const result = await createBlogPost(taskResponse as BlogPostOutline);
     return result;
   }
@@ -258,7 +258,7 @@ export const connectWithOpenAi = async () => {
 
 export const connectWithOpenApiWithFilteredInformation = async (
   doc: string,
-  question: string,
+  question: string | undefined,
   modelName: string
 ) => {
   const response = await fetch(`${OPEAN_API_CHAT_URL}`, {

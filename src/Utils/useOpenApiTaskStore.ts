@@ -4,30 +4,61 @@ import {
   fetchTaskData,
   submitAnswer,
 } from "./utils";
-import { GPT_3_5_TURBO, TASK_NAME_03_02_SCRAPER } from "./utils.constants";
+import { GPT_3_5_TURBO } from "./utils.constants";
+import { TaskData } from "./utils.interfaces";
 
 interface OpenApiTaskState {
   isLoading: boolean;
   errorMessage: string;
-  performTask: () => Promise<void>;
+  performTask: (taskName: string, initialSystemData?: string) => Promise<void>;
 }
 
 const useOpenApiTaskStore = create<OpenApiTaskState>((set) => ({
   isLoading: false,
   errorMessage: "",
-  performTask: async () => {
+  performTask: async (taskName: string, initialSystemData?: string) => {
     set(() => ({ isLoading: true, errorMessage: "" }));
     try {
-      const { token, task } = await fetchTaskData(TASK_NAME_03_02_SCRAPER);
-      const systemInfo = `check this article ${task.input} and answer the question. answer briefly.`;
-      const question = task.question;
+      let task: TaskData["task"];
+      let token;
+      let response: string;
+      const accumulatedHints: string[] = [];
+      let attempt = 0;
+      const maxAttempts = 5;
 
-      const response = await connectWithOpenApiWithFilteredInformation(
-        systemInfo,
-        question,
-        GPT_3_5_TURBO
+      while (attempt < maxAttempts) {
+        ({ task, token } = await fetchTaskData(taskName));
+        const question = task.question ?? task.hint;
+
+        if (question && !accumulatedHints.includes(question)) {
+          accumulatedHints.push(question);
+        }
+
+        response = await connectWithOpenApiWithFilteredInformation(
+          initialSystemData ??
+            `check this article ${task.input} and answer the question. answer briefly.`,
+          accumulatedHints.join("; "),
+          GPT_3_5_TURBO
+        );
+
+        if (response !== "nie") {
+          const result = await submitAnswer(token, response);
+          if (
+            result.code === 406 ||
+            result.msg === "this is NOT the correct answer"
+          ) {
+            attempt++;
+          } else {
+            console.log("Odpowiedź została zaakceptowana.");
+            return;
+          }
+        } else {
+          attempt++;
+        }
+      }
+      console.log(
+        "Nie udało się uzyskać prawidłowej odpowiedzi po maksymalnej liczbie prób."
       );
-      await submitAnswer(token, response);
     } catch (error) {
       console.error("Error performing OpenAPI task:", error);
       set(() => ({ isLoading: false, errorMessage: "Error performing task" }));

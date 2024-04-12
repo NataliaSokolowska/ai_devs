@@ -10,6 +10,7 @@ import Whisper from "./SecondWeek/04/Whisper";
 import Functions from "./SecondWeek/05/Functions";
 import Rodo from "./ThirdWeek/01/Rodo";
 import Scraper from "./ThirdWeek/02/Scraper";
+import Whoami from "./ThirdWeek/03/Whoami";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       {/* <Functions /> */}
       {/* <Rodo /> */}
       {/* <Scraper /> */}
+      {/* <Whoami /> */}
     </>
   );
 }
