@@ -11,6 +11,7 @@ import Functions from "./SecondWeek/05/Functions";
 import Rodo from "./ThirdWeek/01/Rodo";
 import Scraper from "./ThirdWeek/02/Scraper";
 import Whoami from "./ThirdWeek/03/Whoami";
+import Search from "./ThirdWeek/04/Search";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       {/* <Rodo /> */}
       {/* <Scraper /> */}
       {/* <Whoami /> */}
+      {/* <Search /> */}
     </>
   );
 }

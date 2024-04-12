@@ -16,6 +16,7 @@ export const TASK_NAME_02_05_FUNCTIONS = "functions";
 export const TASK_NAME_03_01_RODO = "rodo";
 export const TASK_NAME_03_02_SCRAPER = "scraper";
 export const TASK_NAME_03_03_WHOAMI = "whoami";
+export const TASK_NAME_03_04_SEARCH = "search";
 
 export const OPEAN_API_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 export const OPEAN_API_MODERATION_URL = "https://api.openai.com/v1/moderations";
@@ -26,6 +27,7 @@ export const OPEN_API_AUDIO_TO_TEXT_WHISPER =
 
 export const OPEN_API_KEY = import.meta.env.VITE_OPEN_API_AI_KEY;
 export const API_KEY = import.meta.env.VITE_API_KEY;
+export const QDRANT_API_KEY = import.meta.env.VITE_QDRANT_API_KEY;
 
 export const LANGUAGE_PL = "Polish";
 
