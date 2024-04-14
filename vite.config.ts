@@ -16,6 +16,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/qdrant/, ""),
       },
+      "/people": {
+        target: "https://tasks.aidevs.pl/data/people.json",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/people\//, ""),
+      },
     },
   },
 });

@@ -17,6 +17,7 @@ export const TASK_NAME_03_01_RODO = "rodo";
 export const TASK_NAME_03_02_SCRAPER = "scraper";
 export const TASK_NAME_03_03_WHOAMI = "whoami";
 export const TASK_NAME_03_04_SEARCH = "search";
+export const TASK_NAME_03_05_PEOPLE = "people";
 
 export const OPEAN_API_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 export const OPEAN_API_MODERATION_URL = "https://api.openai.com/v1/moderations";
