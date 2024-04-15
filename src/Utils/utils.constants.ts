@@ -20,6 +20,7 @@ export const TASK_NAME_03_04_SEARCH = "search";
 export const TASK_NAME_03_05_PEOPLE = "people";
 
 export const TASK_NAME_04_01_KNOWLEDGE = "knowledge";
+export const TASK_NAME_04_02_TOOLS = "tools";
 
 export const OPEAN_API_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 export const OPEAN_API_MODERATION_URL = "https://api.openai.com/v1/moderations";
