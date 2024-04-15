@@ -283,16 +283,9 @@ export const connectWithOpenApiWithFilteredInformation = async (
           content: question,
         },
       ],
-      // tools: tools && toolsData,
-      // tool_choice: {
-      //   type: "function",
-      //   function: {
-      //     name: "fetchPopulation",
-      //   },
-      // },
-      response_format: {
-        type: "json_object",
-      },
+      tools: tools && toolsData,
+      tool_choice: "auto",
+      response_format: { type: "json_object" },
     }),
   });
 
