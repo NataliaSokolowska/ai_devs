@@ -1,25 +1,35 @@
-type ExchangeResponse = {
+export interface ExchangeResponse {
   function: "fetchExchangeRate";
   arguments: {
     currency: string;
   };
-};
+}
 
-type PopulationResponse = {
+export interface PopulationResponse {
   function: "fetchPopulation";
   arguments: {
     country: string;
   };
-};
+}
 
-type GeneralResponse = {
+export interface CapitalResponse {
+  function: "fetchCapital";
+  arguments: {
+    capitalCountry: string;
+  };
+}
+
+interface GeneralResponse {
   type: "general";
-  response: string;
-};
+  arguments: {
+    answer: string;
+  };
+}
 
 export type ApiResponse =
   | ExchangeResponse
   | PopulationResponse
+  | CapitalResponse
   | GeneralResponse;
 
 export interface FunctionCalling {

@@ -12,7 +12,7 @@ export const TYPE_OF_DATA_V2 = {
   POPULATION: "fetchPopulation",
   CAPITAL: "fetchCapital",
   GENERAL: "general",
-};
+} as const;
 
 export const KNOWLEDGE_SYSTEM_PROMPT = `
 You are a helpful assistant designed to answer questions in a specific manner based on the category of the query.
@@ -95,13 +95,13 @@ A: {
 Q: Jaka jest stolica Francji?
 A: {
   "function": "fetchCapital",
-  "arguments": {"country": "france"}
+  "arguments": {"capitalCountry": "france"}
 }
 
 Q: Co jest stolicą Czech?
 A: {
   "function": "fetchCapital",
-  "arguments": {"country": "czech"}
+  "arguments": {"capitalCountry": "czech"}
 }
 
 Q: Who painted the Mona Lisa?
@@ -164,13 +164,13 @@ export const FUNCTION_CALLING: FunctionCalling[] = [
       parameters: {
         type: "object",
         properties: {
-          country: {
+          capitalCountry: {
             type: "string",
             description:
               'Capital city of a country in English for which data is required (e.g., "Warsaw", "Berlin")',
           },
         },
-        required: ["country"],
+        required: ["capitalCountry"],
       },
     },
   },

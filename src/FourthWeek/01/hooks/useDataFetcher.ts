@@ -27,16 +27,21 @@ const useDataFetcher = () => {
       });
   };
 
-  const fetchCapital = async (country: string) => {
+  const fetchCapital = async (capitalCountry: string) => {
     try {
       const response = await fetch(
-        `/restcountries/${country.toLowerCase()}?fields=capital`
+        `/restcountries/${capitalCountry.toLowerCase()}?fields=capital`
       );
       const data = await response.json();
       const capital = data[0].capital;
       return capital;
     } catch (error) {
-      console.error("Error fetching population for", country, ":", error);
+      console.error(
+        "Error fetching population for",
+        capitalCountry,
+        ":",
+        error
+      );
       throw error;
     }
   };

@@ -14,46 +14,49 @@ import {
   KNOWLEDGE_SYSTEM_PROMPT_V2,
   TYPE_OF_DATA_V2,
 } from "./Knowledge.constants";
-import { ApiResponse } from "./Knowledge.interface";
+import {
+  ApiResponse,
+  CapitalResponse,
+  ExchangeResponse,
+  PopulationResponse,
+} from "./Knowledge.interface";
 
 const Knowledge = () => {
   const { fetchExchangeRate, fetchPopulation, fetchCapital } = useDataFetcher();
 
   useEffect(() => {
+    const hasFunctionProperty = (
+      response: ApiResponse
+    ): response is ExchangeResponse | PopulationResponse | CapitalResponse => {
+      return "function" in response;
+    };
+
     const handleResponse = (response: ApiResponse, token: string) => {
-      if (response.function === TYPE_OF_DATA_V2.EXCHANGE) {
-        console.log("exchange", response);
-        const { currency } = response.arguments;
-        console.log("currency", currency);
-        if (currency) {
+      if (hasFunctionProperty(response)) {
+        if (response.function === TYPE_OF_DATA_V2.EXCHANGE) {
+          const { currency } = response.arguments as { currency: string };
           fetchExchangeRate(currency)
             .then((rate) => submitAnswer(token, rate))
             .catch((error) =>
               console.error("Error handling exchange rate:", error)
             );
-        }
-      } else if (response.function === TYPE_OF_DATA_V2.POPULATION) {
-        console.log("population", response);
-        const { country } = response.arguments;
-        if (country) {
+        } else if (response.function === TYPE_OF_DATA_V2.POPULATION) {
+          const { country } = response.arguments as { country: string };
           fetchPopulation(country)
             .then((population) => submitAnswer(token, population))
             .catch((error) =>
               console.error("Error handling population:", error)
             );
-        }
-      } else if (response.function === "FetchCapital") {
-        const { country } = response.arguments;
-        if (country) {
-          fetchCapital(country)
+        } else if (response.function === TYPE_OF_DATA_V2.CAPITAL) {
+          const { capitalCountry } = response.arguments as {
+            capitalCountry: string;
+          };
+          fetchCapital(capitalCountry)
             .then((capital) => submitAnswer(token, capital))
-            .catch((error) =>
-              console.error("Error handling population:", error)
-            );
+            .catch((error) => console.error("Error handling capital:", error));
         }
       } else {
-        console.log("general data", response);
-        const { answer } = response.arguments;
+        const { answer } = response.arguments as { answer: string };
         submitAnswer(token, answer).catch((error) =>
           console.error("Error submitting answer:", error)
         );
@@ -65,8 +68,6 @@ const Knowledge = () => {
         connectWithOpenApiWithFilteredInformation(
           KNOWLEDGE_SYSTEM_PROMPT_V2,
           task.question,
-          // "What is the exchange rate for the Euro?",
-          // "What is the population of Germany?",
           GPT_3_5_TURBO,
           true,
           FUNCTION_CALLING
