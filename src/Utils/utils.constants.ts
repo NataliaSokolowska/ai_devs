@@ -21,6 +21,7 @@ export const TASK_NAME_03_05_PEOPLE = "people";
 
 export const TASK_NAME_04_01_KNOWLEDGE = "knowledge";
 export const TASK_NAME_04_02_TOOLS = "tools";
+export const TASK_NAME_04_03_GNOME = "gnome";
 
 export const OPEAN_API_CHAT_URL = "https://api.openai.com/v1/chat/completions";
 export const OPEAN_API_MODERATION_URL = "https://api.openai.com/v1/moderations";
@@ -37,3 +38,5 @@ export const LANGUAGE_PL = "Polish";
 
 export const GPT_3_5_TURBO = "gpt-3.5-turbo";
 export const GPT_4 = "gpt-4";
+export const GPT_4_VISION = "gpt-4V";
+export const GPT_4_TURBO = "gpt-4-turbo";

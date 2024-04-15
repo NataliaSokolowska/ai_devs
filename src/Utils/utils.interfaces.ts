@@ -47,6 +47,7 @@ export type GetTaskResponse = {
   input?: string[];
   question?: string;
   hint?: string;
+  url?: string;
 };
 
 export type ErrorType = "HttpError" | "TimeoutError" | "NetworkError";

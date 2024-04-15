@@ -15,6 +15,7 @@ import Search from "./ThirdWeek/04/Search";
 import People from "./ThirdWeek/05/People";
 import Knowledge from "./FourthWeek/01/Knowledge";
 import Tools from "./FourthWeek/02/Tools";
+import Gnome from "./FourthWeek/03/Gnome";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       {/* <People /> */}
       {/* <Knowledge /> */}
       {/* <Tools /> */}
+      {/* <Gnome /> */}
     </>
   );
 }

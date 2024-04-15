@@ -2,6 +2,7 @@ import { FunctionCalling } from "../FourthWeek/01/Knowledge.interface";
 import {
   ANSWER_URL,
   API_KEY,
+  GPT_4_TURBO,
   LANGUAGE_PL,
   OPEAN_API_CHAT_URL,
   OPEAN_API_MODERATION_URL,
@@ -289,9 +290,9 @@ export const connectWithOpenApiWithFilteredInformation = async (
       //     name: "fetchPopulation",
       //   },
       // },
-      // response_format: {
-      //   type: "json_object",
-      // },
+      response_format: {
+        type: "json_object",
+      },
     }),
   });
 
@@ -348,4 +349,47 @@ export const connectWithWhisper = async (audioFile: File) => {
   const data = await response.json();
   console.log(data);
   return data;
+};
+
+export const connectWithVision = async (
+  imageUrl: string,
+  userQuestion: string
+) => {
+  const response = await fetch(`${OPEAN_API_CHAT_URL}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${OPEN_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: GPT_4_TURBO,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: userQuestion,
+            },
+            {
+              type: "image_url",
+              image_url: {
+                url: imageUrl,
+              },
+            },
+          ],
+        },
+      ],
+      max_tokens: 150,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error ${response.status}`);
+  }
+
+  const data = await response.json();
+  const answer = data.choices[0].message.content;
+
+  return answer;
 };
