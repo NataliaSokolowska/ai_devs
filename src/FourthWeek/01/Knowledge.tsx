@@ -32,6 +32,9 @@ const Knowledge = () => {
     };
 
     const handleResponse = (response: ApiResponse, token: string) => {
+      if (response === null) {
+        return;
+      }
       if (hasFunctionProperty(response)) {
         if (response.function === TYPE_OF_DATA_V2.EXCHANGE) {
           const { currency } = response.arguments as { currency: string };
