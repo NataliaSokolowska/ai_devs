@@ -13,6 +13,7 @@ import Scraper from "./ThirdWeek/02/Scraper";
 import Whoami from "./ThirdWeek/03/Whoami";
 import Search from "./ThirdWeek/04/Search";
 import People from "./ThirdWeek/05/People";
+import Knowledge from "./FourthWeek/01/Knowledge";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       {/* <Whoami /> */}
       {/* <Search /> */}
       {/* <People /> */}
+      {/* <Knowledge /> */}
     </>
   );
 }

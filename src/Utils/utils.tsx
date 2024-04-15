@@ -1,3 +1,4 @@
+import { FunctionCalling } from "../FourthWeek/01/Knowledge.interface";
 import {
   ANSWER_URL,
   API_KEY,
@@ -259,7 +260,9 @@ export const connectWithOpenAi = async () => {
 export const connectWithOpenApiWithFilteredInformation = async (
   doc: string,
   question: string | undefined,
-  modelName: string
+  modelName: string,
+  tools?: boolean,
+  toolsData?: FunctionCalling[]
 ) => {
   const response = await fetch(`${OPEAN_API_CHAT_URL}`, {
     method: "POST",
@@ -279,6 +282,16 @@ export const connectWithOpenApiWithFilteredInformation = async (
           content: question,
         },
       ],
+      // tools: tools && toolsData,
+      // tool_choice: {
+      //   type: "function",
+      //   function: {
+      //     name: "fetchPopulation",
+      //   },
+      // },
+      // response_format: {
+      //   type: "json_object",
+      // },
     }),
   });
 
